@@ -48,7 +48,7 @@ Maldini is intended to streamline the workflow of those who write content both i
 
 ### Known Issues ###
 
-- Improve handling of various dashes in `pages` field. The best way to do this is probably to defer it to the [Haml][haml] processor, which [should][hamlredcarpet] in any case be using a [SmartyPants][smarty]-enabled processor such as [Redcarpet][redcarpet]. But it doesn't yet.
+- Convert single dashes to endashes in `pages` field.
 - Better treatment of cases where a bibliography contains an author with multiple publications in a single year. Default behaviour should be to incrementally append a lowercase letter to the `year` field (Author, 2001a; Author, 2001b).
 - Reference list should be sorted alphabetically by default.
 
