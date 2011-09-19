@@ -54,6 +54,7 @@ Maldini is intended to streamline the workflow of those who write content both i
 
 ### Wishlist ###
 
+- Generate HTML marked up with identifiers to permit customised styling of citations and (especially) reference lists.
 - Find a way to embed citations directly in Markdown pages, perhaps by totally re-engineering everything to utilise the [citation processing][citepandoc] implemented by [Pandoc][pandoc].
 - Provide methods for citing page or section numbers, modeled on [biblatex][biblatex] syntax.
 - Provide methods for simultaneously citing multiple entries.
