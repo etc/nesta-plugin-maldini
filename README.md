@@ -37,8 +37,8 @@ Maldini is intended to streamline the workflow of those who write content both i
   - `book`
   - `inbook`
   - `incollection`
-- Unsupported entry types:
   - `inproceedings`
+- Unsupported entry types:
   - `unpublished`
   - `phdthesis`
 

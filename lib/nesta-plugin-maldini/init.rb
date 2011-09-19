@@ -34,8 +34,12 @@ module Nesta
           # USAGE: open('file')
           # 'file' is ordinarily a URI specifying the address of a .bib file formatted as BibTeX
           
+          # The :filter => :latex hash tells BibTeX to convert all strings to Unicode,
+          # which among other things converts '--' to endashes and special characters to
+          # their Unicode equivalents.  See: https://github.com/inukshuk/latex-decode
+          #
           # TODO: Something smart if file cannot be opened.
-          @thebibliography = BibTeX.open(file)
+          @thebibliography = BibTeX.open(file, :filter => :latex)
         end # def open
 
         # CITATIONS
@@ -266,7 +270,16 @@ module Nesta
           # INPROCEEDINGS
           elsif entry.type == :inproceedings
             # REQUIRED_FIELDS: :inproceedings => [:author,:title,:booktitle,:year]
-            entrystring << "Maldini support for inproceedings coming soon"
+            entrystring << entry[:author].to_s << ". " << entry[:year].to_s << ". \"" << entry[:title].to_s + "\", in "
+            # editors
+            entrystring << "*" << entry[:booktitle].to_s << "*"
+            entrystring << ", " << entry[:publisher].to_s if entry.has_field?(:publisher)
+            entrystring << ", " << entry[:address].to_s if entry.has_field?(:address)
+            entrystring << ", Vol. " << entry[:volume].to_s if entry.has_field?(:volume)
+            entrystring << ", No. " << entry[:number].to_s if entry.has_field?(:number)
+            entrystring << ", " << Date::MONTHNAMES[BibTeX::Entry::MONTHS.index(entry[:month].to_sym)+1] if entry.has_field?(:month)
+            entrystring << ", pp. " << entry[:pages].to_s if entry.has_field?(:pages)
+            entrystring << ". URI: [" << entry[:url].to_s << "](" << entry[:url].to_s << ")" if entry.has_field?(:url)
 
           # PHDTHESIS
           elsif entry.type == :phdthesis
