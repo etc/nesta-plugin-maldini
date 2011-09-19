@@ -163,8 +163,8 @@ module Nesta
           # - Implement this in a class extending BibTeX::Names
           citestring = ""
           if (author.length > 0)
-            citestring << author[0].prefix.to_s unless author[0].prefix.nil?
-            citestring << " " << author[0].last
+            citestring << author[0].prefix.to_s << " " unless author[0].prefix.nil?
+            citestring << author[0].last
             if (author.length > 1)
               if (author.length > 2)
                 author[1,author.length-2].each do |a|
