@@ -39,7 +39,8 @@ module Nesta
           # their Unicode equivalents.  See: https://github.com/inukshuk/latex-decode
           #
           # TODO: Something smart if file cannot be opened.
-          @thebibliography = BibTeX.open(file, :filter => :latex)
+          @thebibliography = BibTeX.open(file)
+          @thebibliography.convert(:latex)
         end # def open
 
         # CITATIONS
