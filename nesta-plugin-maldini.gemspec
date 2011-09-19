@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://bweslake.org"
   s.summary     = %q{BibTeX References for Nesta}
   s.description = <<-EOF
-  Maldini is a plugin for the Nesta CMS.  It allows references to be added to posts from a specified BibTeX file.  The internals are handled by BibTeX-Ruby.  
+  Maldini is a plugin for Nesta to generate citations and reference lists from BibTeX files.  
   EOF
 
   s.rubyforge_project = "nesta-plugin-maldini"
