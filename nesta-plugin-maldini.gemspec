@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.version     = Nesta::Plugin::Maldini::VERSION
   s.authors     = ["Brad Weslake"]
   s.email       = ["brad.weslake@gmail.com"]
-  s.homepage    = "http://bweslake.org"
-  s.summary     = %q{BibTeX References for Nesta}
+  s.homepage    = "http://bweslake.org/research/resources/maldini"
+  s.summary     = %q{BibTeX citations and reference lists for Nesta}
   s.description = <<-EOF
   Maldini is a plugin for Nesta to generate citations and reference lists from BibTeX files.  
   EOF

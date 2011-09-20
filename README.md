@@ -6,11 +6,15 @@ Maldini is intended to streamline the workflow of those who write content both i
 
 ## Installation ##
 
-*Coming soon*. For now, see the [Nesta plugin][nestaplug] documentation.
+Maldini is presently in pre-release development. The first official release, of version 0.0.1, will occur only when a `gem` is released to [rubygems.org][rubygems.org]. For now, the development version of Maldini may be installed by adding the following line to the Gemfile of your Nesta site:
+
+    gem 'nesta-plugin-maldini', :git => 'git://github.com/etc/nesta-plugin-maldini.git'
+
+For guidelines for working with the Nesta plugin sources, see the [Nesta plugin][nestaplug] documentation.
 
 ## Usage ##
 
-*Coming soon*.
+The Maldini [project homepage][maldiniproject] is itself an example of how to employ Maldini. The source from which it is generated can be browsed [here][src], and the BibTeX file it employs can be browsed [here][maldinibib].
 
 ## ACKNOWLEDGEMENTS ##
 
@@ -19,8 +23,6 @@ Maldini is intended to streamline the workflow of those who write content both i
 - Philipp Lehman for the indispensable [biblatex][biblatex].
 
 ## VERSION HISTORY ##
-
-*Note*: Maldini is currently in pre-release development.  The first official release, of version 0.0.1, will occur only when a `gem` is released to [rubygems.org][rubygems.org].
 
 ### 0.0.1 ###
 
@@ -53,6 +55,7 @@ Maldini is intended to streamline the workflow of those who write content both i
 
 - Convert single dashes to endashes in `pages` field.
 - Better treatment of cases where a bibliography contains authors with the same last name with multiple publications in a single year. Default behaviour should be to incrementally append a lowercase letter to the `year` field (Name, 2001a; Name, 2001b).
+- When deployed to Heroku
 
 ### Wishlist ###
 
@@ -98,8 +101,8 @@ Copyright © 2011 Brad Weslake.
     THE SOFTWARE.
 
 [ashton]: http://www.zerply.com/profile/grahamashton
-[biber]: http://biblatex-biber.sourceforge.net/
 [bibdesk]: http://bibdesk.sourceforge.net/
+[biber]: http://biblatex-biber.sourceforge.net/
 [biblatex]: http://ctan.math.utah.edu/ctan/tex-archive/help/Catalogue/entries/biblatex.html
 [bibtex]: http://www.ctan.org/pkg/bibtex
 [brad]: http://bweslake.org/
@@ -112,11 +115,14 @@ Copyright © 2011 Brad Weslake.
 [haml]: http://haml-lang.com/
 [keil]: http://sylvester.keil.or.at/
 [latex]: http://www.latex-project.org/
+[maldinibib]: https://github.com/etc/bweslake/blob/master/content/attachments/maldini.bib
+[maldiniproject]: http://bweslake.org/research/resources/maldini
 [nestaplug]: nestacms.com/docs/plugins/
 [nesta]: http://nestacms.com/
 [pandoc]: http://johnmacfarlane.net/pandoc/index.html
 [redcarpet]: https://github.com/tanoku/redcarpet
 [rspec]: http://rspec.info/
-[smarty]: http://daringfireball.net/projects/smartypants/
-
 [rubygems.org]: rubygems.org
+[smarty]: http://daringfireball.net/projects/smartypants/
+[src]: https://github.com/etc/bweslake/blob/master/content/pages/research/resources/maldini.haml
+
