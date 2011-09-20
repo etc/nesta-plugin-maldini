@@ -25,6 +25,9 @@ Maldini is intended to streamline the workflow of those who write content both i
 ### 0.0.1 ###
 
 - Initial skeleton release.
+- Supported features:
+  - Correctly parses LaTeX code in field data
+  - Sorts reference list by surname, then first name, then year
 - `Nesta::Plugin::Maldini::Bibliography` public methods:
   - `open()`
   - `textcite()`
@@ -49,12 +52,15 @@ Maldini is intended to streamline the workflow of those who write content both i
 ### Known Issues ###
 
 - Convert single dashes to endashes in `pages` field.
-- Better treatment of cases where a bibliography contains an author with multiple publications in a single year. Default behaviour should be to incrementally append a lowercase letter to the `year` field (Author, 2001a; Author, 2001b).
-- Reference list should be sorted alphabetically by default.
+- Better treatment of cases where a bibliography contains an author with the same last name has multiple publications in a single year. Default behaviour should be to incrementally append a lowercase letter to the `year` field (Name, 2001a; Name, 2001b).
 
 ### Wishlist ###
 
-- Generate HTML marked up with identifiers to permit customised styling of citations and (especially) reference lists.
+- Create [BibDesk][bibdesk] template for copying entries as Maldini citations.
+- Allow bibliography file to be specified in custom Nesta metadata.
+- Generate HTML marked up with identifiers to permit:
+  - Customised styling of citations and (especially) reference lists.
+  - Hyperlinks to references. 
 - Find a way to embed citations directly in Markdown pages, perhaps by totally re-engineering everything to utilise the [citation processing][citepandoc] implemented by [Pandoc][pandoc].
 - Provide methods for citing page or section numbers, modeled on [biblatex][biblatex] syntax.
 - Provide methods for simultaneously citing multiple entries.
@@ -93,6 +99,7 @@ Copyright © 2011 Brad Weslake.
 
 [ashton]: http://www.zerply.com/profile/grahamashton
 [biber]: http://biblatex-biber.sourceforge.net/
+[bibdesk]: http://bibdesk.sourceforge.net/
 [biblatex]: http://ctan.math.utah.edu/ctan/tex-archive/help/Catalogue/entries/biblatex.html
 [bibtex]: http://www.ctan.org/pkg/bibtex
 [brad]: http://bweslake.org/

@@ -148,11 +148,14 @@ module Nesta
         def printbibliography()
           # USAGE: printbibliography()
           # Modeled on biblatex command \printbibliography
+
+          # Sort by last name first, first name second, year third
+          @theentries.sort_by!{ |e| [ e[:author][0].last, e[:author][0].first, e[:year] ] }
           bibliographystring = ""
           @theentries.each do |e|
               bibliographystring << "- "
               bibliographystring << formatentry(e)
-              bibliographystring << ".  \n"
+              bibliographystring << ".  \n"            
           end # each
           return bibliographystring
         end # def printbibliography
@@ -258,7 +261,9 @@ module Nesta
             # REQUIRED_FIELDS: :incollection => [:author,:title,:booktitle,:publisher,:year]
 
             entrystring << entry[:author].to_s << ". " << entry[:year].to_s << ". \"" << entry[:title].to_s + "\", in "
-            # editors
+            # TODO: Work out why entry[:editor].to_s has a weird hash in the middle, but entry[:author].to_s doesn't.
+            #       Hint: It's related to BibTeX::Value::to_s()
+            entrystring << formatauthors(entry[:editor]) << " (Ed), " if entry.has_field?(:editor)
             entrystring << "*" << entry[:booktitle].to_s << "*"
             entrystring << ", " << entry[:publisher].to_s if entry.has_field?(:publisher)
             entrystring << ", " << entry[:address].to_s if entry.has_field?(:address)
@@ -272,7 +277,9 @@ module Nesta
           elsif entry.type == :inproceedings
             # REQUIRED_FIELDS: :inproceedings => [:author,:title,:booktitle,:year]
             entrystring << entry[:author].to_s << ". " << entry[:year].to_s << ". \"" << entry[:title].to_s + "\", in "
-            # editors
+            # TODO: Work out why entry[:editor].to_s has a weird hash in the middle, but entry[:author].to_s doesn't.
+            #       Hint: It's related to BibTeX::Value::to_s()
+            entrystring << formatauthors(entry[:editor]) << " (Ed), " if entry.has_field?(:editor)
             entrystring << "*" << entry[:booktitle].to_s << "*"
             entrystring << ", " << entry[:publisher].to_s if entry.has_field?(:publisher)
             entrystring << ", " << entry[:address].to_s if entry.has_field?(:address)
