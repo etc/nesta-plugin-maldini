@@ -1,8 +1,6 @@
 # Maldini #
 
-Maldini is a [Nesta plugin][nestaplug] allowing citations and bibliographies to be automatically generated from a [BibTeX][bibtex] file. Maldini provides a syntax modeled on (a very small subset of) the syntax provided by [biblatex][biblatex].  Maldini is basically a wrapper for [bibtex-ruby][bruby], which looks after the hard work of parsing the BibTeX file.
-
-Maldini is intended to streamline the workflow of those who write content both in [LaTeX][latex] and for the web.  It is also intended to make [Nesta][nesta] the tool of choice for academic websites. For more on the idea behind Maldini, see the Maldini [project homepage][maldiniproject].
+Maldini is a [Nesta plugin][nestaplug] allowing citations and bibliographies to be automatically generated from [BibTeX][bibtex] files. It is intended to streamline the workflow of those who write content both in [LaTeX][latex] and for the web.  It is also intended to make [Nesta][nesta] the tool of choice for academic websites. For more on the idea behind Maldini, see the Maldini [project homepage][maldiniproject].
 
 ## Installation ##
 
@@ -10,11 +8,11 @@ Maldini is presently in pre-release development. The first official release, of 
 
     gem 'nesta-plugin-maldini', :git => 'git://github.com/etc/nesta-plugin-maldini.git'
 
-For guidelines for working with the Nesta plugin sources, see the [Nesta plugin][nestaplug] documentation.
+For guidelines for working with Nesta plugin sources, see the [Nesta plugin][nestaplug] documentation.
 
 ## Usage ##
 
-The Maldini [project homepage][maldiniproject] is itself an example of how to employ Maldini. The source from which it is generated can be browsed [here][src], and the BibTeX file it employs can be browsed [here][maldinibib].
+Maldini provides a syntax modeled on (a very small subset of) the syntax provided by [biblatex][biblatex].  It is basically a wrapper for [bibtex-ruby][bruby], which looks after the hard work of parsing the BibTeX file. The Maldini [project homepage][maldiniproject] is itself an example of how to employ Maldini. The source from which it is generated can be browsed [here][src], and the BibTeX file it employs can be browsed [here][maldinibib].
 
 ## ACKNOWLEDGEMENTS ##
 
@@ -55,7 +53,7 @@ The Maldini [project homepage][maldiniproject] is itself an example of how to em
 
 - Convert single dashes to endashes in `pages` field.
 - Better treatment of cases where a bibliography contains authors with the same last name with multiple publications in a single year. Default behaviour should be to incrementally append a lowercase letter to the `year` field (Name, 2001a; Name, 2001b).
-- When deployed to Heroku
+- [Heroku][heroku] deployments do not like bibliographies stored in the Nesta `attachments` directory.
 
 ### Wishlist ###
 
@@ -113,6 +111,7 @@ Copyright © 2011 Brad Weslake.
 [github]: http://github.com/
 [hamlredcarpet]: https://github.com/nex3/haml/pull/383
 [haml]: http://haml-lang.com/
+[heroku]: http://www.heroku.com/
 [keil]: http://sylvester.keil.or.at/
 [latex]: http://www.latex-project.org/
 [maldinibib]: https://github.com/etc/bweslake/blob/master/content/attachments/maldini.bib
