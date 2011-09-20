@@ -10,11 +10,11 @@ module Nesta
 
       class Bibliography
 
-        # INITIALIZATION
-        def initialize(file = nil)
-          # USAGE:  Nesta::Plugin::Maldini::Bibliography.new('file')
-          #         'file' is optional
+        # @group INITIALIZATION
 
+        # USAGE:  Nesta::Plugin::Maldini::Bibliography.new('file')
+        #         'file' is optional
+        def initialize(file = nil)
           # Initialise instance variables
           @thebibliography = nil
           @theentries = []
@@ -25,11 +25,10 @@ module Nesta
           end # if (file != nil)
         end # def initialize
 
-        # FILES
+        # @group FILES
+
         # TODO:
         # - Set default file to '/attachments/bibliography.bib'
-        # - Allow file to be opened as an argument to Bibliography.new()
-
         def open(file)
           # USAGE: open('file')
           # 'file' is ordinarily a URI specifying the address of a .bib file formatted as BibTeX
@@ -43,7 +42,7 @@ module Nesta
           @thebibliography.convert(:latex)
         end # def open
 
-        # CITATIONS
+        # @group CITATIONS
         # The syntax of citations is modeled on biblatex
         # See: http://goo.gl/UYoCY
         #
@@ -53,9 +52,9 @@ module Nesta
         # TODO:
         # - Add starred versions, eg. textcite*(citekey), which suppress author names.
 
+        # USAGE: textcite('citationkey')
+        # Modeled on biblatex command \textcite{citationkey}
         def textcite(citekey)
-          # USAGE: textcite('citationkey')
-          # Modeled on biblatex command \textcite{citationkey}
 
           # Assign an entry based on the citation key we have been passed.
           # TODO: Something smart if lookup fails.
@@ -76,9 +75,9 @@ module Nesta
           return citestring
         end # def textcite 
 
+        # USAGE: citeauthor('citationkey')
+        # Modeled on biblatex command \citeauthor{citationkey}
         def citeauthor(citekey)
-          # USAGE: citeauthor('citationkey')
-          # Modeled on biblatex command \citeauthor{citationkey}
 
           # We don't keep track of entries cited this way for displaying in the bibliography,
           # so it may make sense to give a warning if this is called for an entry that is not
@@ -100,9 +99,9 @@ module Nesta
           return citestring                            
         end # def citeauthor
 
+        # USAGE: parencite('citationkey')
+        # Modeled on biblatex command \parencite{citationkey}
         def parencite(citekey)
-          # USAGE: parencite('citationkey')
-          # Modeled on biblatex command \parencite{citationkey}
           
           # Assign an entry based on the citation key we have been passed.
           # TODO: Something smart if lookup fails.
@@ -123,9 +122,9 @@ module Nesta
           return citestring
         end # def parencite
 
+        # USAGE: fullcite('citationkey')
+        # Modeled on biblatex command \fullcite{citationkey}
         def fullcite(citekey)
-          # USAGE: fullcite('citationkey')
-          # Modeled on biblatex command \fullcite{citationkey}
 
           # Assign an entry based on the citation key we have been passed.
           # TODO: Something smart if lookup fails.
@@ -144,10 +143,11 @@ module Nesta
           return citestring
         end
         
-        # REFERENCE LISTS
+        # @group REFERENCE LISTS
+
+        # USAGE: printbibliography()
+        # Modeled on biblatex command \printbibliography        
         def printbibliography()
-          # USAGE: printbibliography()
-          # Modeled on biblatex command \printbibliography
 
           # Sort by last name first, first name second, year third
           @theentries.sort_by!{ |e| [ e[:author][0].last, e[:author][0].first, e[:year] ] }
@@ -165,12 +165,13 @@ module Nesta
         # PROTECTED METHODS
         protected        
 
-        # FORMATS
+        # @group FORMATS
+
+        # Returns last names in a format suitable for citations
+        # TODO:
+        # - There has to be a way to do this in a few elegant lines, but I am a hack  
+        # - Implement this in a class extending BibTeX::Names
         def formatauthors(author)
-          # Returns last names in a format suitable for citations
-          # TODO:
-          # - There has to be a way to do this in a few elegant lines, but I am a hack  
-          # - Implement this in a class extending BibTeX::Names
           citestring = ""
           if (author.length > 0)
             citestring << author[0].prefix.to_s << " " unless author[0].prefix.nil?
@@ -193,12 +194,12 @@ module Nesta
           return citestring
         end # def formatauthors
 
+        # USAGE: formatentry(BibTeX::Entry)        
+        # The format here is presently tailored to my own preferences. Formats should eventually be configurable.
+        # TODO:
+        # - Implement option to format citations in any format specified in Citation Style Language,
+        #   by wrapping citeproc-ruby.
         def formatentry(entry)
-          # USAGE: formatentry(BibTeX::Entry)        
-          # The format here is presently tailored to my own preferences. Formats should eventually be configurable.
-          # TODO:
-          # - Implement option to format citations in any format specified in Citation Style Language,
-          #   by wrapping citeproc-ruby.
           entrystring = ""
 
           # REQUIRED_FIELDS are specified in BibTeX::Entry::REQUIRED_FIELDS
@@ -313,7 +314,10 @@ module Nesta
           end # if
           return entrystring
         end #formatentry
+
+        # @group UTILITIES
         
+        # This is a hack for now.  See: https://github.com/inukshuk/bibtex-ruby/issues/22
         def crosspopulate(entry,parententry)
           parententry.fields.keys.each do |k|
             entry[k] = parententry[k] unless entry.has_field?(k)
