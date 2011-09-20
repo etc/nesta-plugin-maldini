@@ -121,7 +121,7 @@ Copyright © 2011 Brad Weslake.
 [pandoc]: http://johnmacfarlane.net/pandoc/index.html
 [redcarpet]: https://github.com/tanoku/redcarpet
 [rspec]: http://rspec.info/
-[rubygems.org]: rubygems.org
+[rubygems.org]: http://rubygems.org
 [smarty]: http://daringfireball.net/projects/smartypants/
 [src]: https://github.com/etc/bweslake/blob/master/content/pages/research/resources/maldini.haml
 
