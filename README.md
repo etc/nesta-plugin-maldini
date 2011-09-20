@@ -2,7 +2,7 @@
 
 Maldini is a [Nesta plugin][nestaplug] allowing citations and bibliographies to be automatically generated from a [BibTeX][bibtex] file. Maldini provides a syntax modeled on (a very small subset of) the syntax provided by [biblatex][biblatex].  Maldini is basically a wrapper for [bibtex-ruby][bruby], which looks after the hard work of parsing the BibTeX file.
 
-Maldini is intended to streamline the workflow of those who write content both in [LaTeX][latex] and for the web.  It is also intended to make [Nesta][nesta] the tool of choice for academic websites.
+Maldini is intended to streamline the workflow of those who write content both in [LaTeX][latex] and for the web.  It is also intended to make [Nesta][nesta] the tool of choice for academic websites. For more on the idea behind Maldini, see the Maldini [project homepage][maldiniproject].
 
 ## Installation ##
 
