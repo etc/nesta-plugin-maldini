@@ -153,9 +153,11 @@ module Nesta
           @theentries.sort_by!{ |e| [ e[:author][0].last, e[:author][0].first, e[:year] ] }
           bibliographystring = ""
           @theentries.each do |e|
-              bibliographystring << "- "
-              bibliographystring << formatentry(e)
-              bibliographystring << ".  \n"            
+              # TODO:
+              # - Add SmartyPants processing here, with eg. rubypants, though once 
+              #   Nesta depends on redcarpet >= 2.0.0 we can do SmartyPants processing with this:
+              #     Redcarpet::Render::SmartyPants.render(formatentry(e))
+              bibliographystring << "- " << formatentry(e) << ".  \n"
           end # each
           return bibliographystring
         end # def printbibliography
