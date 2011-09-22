@@ -117,8 +117,8 @@ Copyright © 2011 Brad Weslake.
 [maldinibib]: https://github.com/etc/bweslake/blob/master/content/attachments/maldini.bib
 [maldiniproject]: http://bweslake.org/research/resources/maldini
 [maldiniyard]: http://rubydoc.info/github/etc/nesta-plugin-maldini/master/frames
-[nestaplug]: nestacms.com/docs/plugins/
-[nesta]: http://nestacms.com/
+[nestaplug]: http://nestacms.com/docs/plugins
+[nesta]: http://nestacms.com
 [pandoc]: http://johnmacfarlane.net/pandoc/index.html
 [redcarpet]: https://github.com/tanoku/redcarpet
 [rspec]: http://rspec.info/
