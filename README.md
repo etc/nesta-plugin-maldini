@@ -51,7 +51,6 @@ Maldini provides a syntax modeled on (a very small subset of) the syntax provide
 
 ### Known Issues ###
 
-- Convert single dashes to endashes in `pages` field.
 - Better treatment of cases where a bibliography contains authors with the same last name with multiple publications in a single year. Default behaviour should be to incrementally append a lowercase letter to the `year` field (Name, 2001a; Name, 2001b).
 - [Heroku][heroku] deployments do not like bibliographies stored in the Nesta `attachments` directory.
 
