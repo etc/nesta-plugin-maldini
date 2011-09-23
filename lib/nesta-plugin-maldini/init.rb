@@ -67,7 +67,7 @@ module Nesta
           end # if
 
           # Format page numbers
-          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1--\\3') if theentry.has_field?(:pages)
+          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1&ndash;\\3') if theentry.has_field?(:pages)
 
           # Add to entries if not already present
           @theentries << theentry if !@theentries.include?(theentry)
@@ -97,7 +97,7 @@ module Nesta
           end # if
 
           # Format page numbers
-          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1--\\3') if theentry.has_field?(:pages)
+          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1&ndash;\\3') if theentry.has_field?(:pages)
 
           # BibTeX::Entry[:author] returns an array of BibTeX::Names.
           theauthors = theentry[:author]
@@ -143,7 +143,7 @@ module Nesta
           end # if
 
           # Format page numbers
-          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1--\\3') if theentry.has_field?(:pages)
+          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1&ndash;\\3') if theentry.has_field?(:pages)
 
           # Add to entries if not already present
           @theentries << theentry if !@theentries.include?(theentry)
