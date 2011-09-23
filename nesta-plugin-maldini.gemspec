@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   # DEPENDENCIES
   s.add_development_dependency("rake")
 
-  s.add_dependency("nesta", ">= 0.9.10")
+  s.add_dependency("nesta", ">= 0.9.11")
   s.add_dependency("bibtex-ruby", ">= 1.3.12")
 
   # For now, Maldini does not depend on citeproc-ruby

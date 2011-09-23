@@ -66,6 +66,9 @@ module Nesta
             theentry = crosspopulate(theentry,@thebibliography[theentry[:crossref].to_sym])
           end # if
 
+          # Format page numbers
+          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1--\\3') if theentry.has_field?(:pages)
+
           # Add to entries if not already present
           @theentries << theentry if !@theentries.include?(theentry)
 
@@ -92,6 +95,9 @@ module Nesta
             # This is a hack for now.  See: https://github.com/inukshuk/bibtex-ruby/issues/22
             theentry = crosspopulate(entry,@thebibliography[theentry[:crossref].to_sym])
           end # if
+
+          # Format page numbers
+          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1--\\3') if theentry.has_field?(:pages)
 
           # BibTeX::Entry[:author] returns an array of BibTeX::Names.
           theauthors = theentry[:author]
@@ -135,6 +141,9 @@ module Nesta
             # This is a hack for now.  See: https://github.com/inukshuk/bibtex-ruby/issues/22
             theentry = crosspopulate(entry,@thebibliography[theentry[:crossref].to_sym])
           end # if
+
+          # Format page numbers
+          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1--\\3') if theentry.has_field?(:pages)
 
           # Add to entries if not already present
           @theentries << theentry if !@theentries.include?(theentry)
