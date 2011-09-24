@@ -67,7 +67,7 @@ Maldini provides a syntax modeled on (a very small subset of) the syntax provide
 - Add support for entry notes, including notes that include [biblatex][biblatex] citations to other entries.
 - Add support for DOI field, formatting as URI *iff* there is no URL field.
 - Automate testing with [RSpec][rspec] or something similar.
-- Allow BibTeX file to be sourced directly from a [GitHub][github] repository.
+- Allow BibTeX file to be sourced directly from a [GitHub][github] repository, perhaps by accessing it through [libgit2][].
 - Implement option to format citations in any format specified in [Citation Style Language][csl], by wrapping [citeproc-ruby][cruby].
 - Add support for [Biber][biber].
 
@@ -113,6 +113,7 @@ Copyright © 2011 Brad Weslake.
 [heroku]: http://www.heroku.com/
 [keil]: http://sylvester.keil.or.at/
 [latex]: http://www.latex-project.org/
+[libgit2]: http://libgit2.github.com/
 [maldinibib]: https://github.com/etc/bweslake/blob/master/content/attachments/maldini.bib
 [maldiniproject]: http://bweslake.org/research/resources/maldini
 [maldiniyard]: http://rubydoc.info/github/etc/nesta-plugin-maldini/master/frames
