@@ -73,6 +73,7 @@ Maldini provides a syntax modeled on (a very small subset of) the syntax provide
 - Generate HTML marked up with identifiers to permit:
   - Customised styling of citations and (especially) reference lists.
   - Hyperlinks to references. 
+  - Citation tooltips displaying the complete reference.
 - Add support for entry notes, including notes that include [biblatex][biblatex] citations to other entries.
 
 #### 1.0 ####
