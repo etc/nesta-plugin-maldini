@@ -54,19 +54,30 @@ Maldini provides a syntax modeled on (a very small subset of) the syntax provide
 - Better treatment of cases where a bibliography contains authors with the same last name with multiple publications in a single year. Default behaviour should be to incrementally append a lowercase letter to the `year` field (Name, 2001a; Name, 2001b).
 - [Heroku][heroku] deployments do not like bibliographies stored in the Nesta `attachments` directory.
 
-### Wishlist ###
+### Milestones ###
+
+#### 0.0.1 ####
+
+- Automate testing with [RSpec][rspec] or something similar.
+
+#### 0.0.2 ####
+
+- Add support for DOI field, formatting as URI *iff* there is no URL field.
+- Provide methods for citing page or section numbers, modeled on [biblatex][biblatex] syntax.
+- Provide methods for simultaneously citing multiple entries, modeled on [biblatex][biblatex] syntax.
+
+#### 0.1 ####
 
 - Create [BibDesk][bibdesk] template for copying entries as Maldini citations.
 - Allow bibliography file to be specified in custom Nesta metadata.
 - Generate HTML marked up with identifiers to permit:
   - Customised styling of citations and (especially) reference lists.
   - Hyperlinks to references. 
-- Find a way to embed citations directly in Markdown pages, perhaps by totally re-engineering everything to utilise the [citation processing][citepandoc] implemented by [Pandoc][pandoc].
-- Provide methods for citing page or section numbers, modeled on [biblatex][biblatex] syntax.
-- Provide methods for simultaneously citing multiple entries.
 - Add support for entry notes, including notes that include [biblatex][biblatex] citations to other entries.
-- Add support for DOI field, formatting as URI *iff* there is no URL field.
-- Automate testing with [RSpec][rspec] or something similar.
+
+#### 1.0 ####
+
+- Find a way to embed citations directly in Markdown pages, perhaps by totally re-engineering everything to utilise the [citation processing][citepandoc] implemented by [Pandoc][pandoc].
 - Allow BibTeX file to be sourced directly from a [GitHub][github] repository, perhaps by accessing it through [libgit2][].
 - Implement option to format citations in any format specified in [Citation Style Language][csl], by wrapping [citeproc-ruby][cruby].
 - Add support for [Biber][biber].
