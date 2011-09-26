@@ -31,9 +31,10 @@ Maldini provides a syntax modeled on (a very small subset of) the syntax provide
   - Citation methods have optional `prenote` and `postnote` parameters, modeled on [biblatex][biblatex] syntax
 - `Nesta::Plugin::Maldini::Bibliography` public methods:
   - `open()`
+  - `cite()`
+  - `parencite()`
   - `textcite()`
   - `citeauthor()`
-  - `parencite()`
   - `fullcite()`
   - `printbibliography()`
 - Supported entry types:
