@@ -28,6 +28,7 @@ Maldini provides a syntax modeled on (a very small subset of) the syntax provide
 - Supported features:
   - Correctly parses LaTeX code in field data
   - Sorts reference list by surname, then first name, then year
+  - Citation methods have optional `prenote` and `postnote` parameters, modeled on [biblatex][biblatex] syntax
 - `Nesta::Plugin::Maldini::Bibliography` public methods:
   - `open()`
   - `textcite()`
@@ -63,7 +64,6 @@ Maldini provides a syntax modeled on (a very small subset of) the syntax provide
 #### 0.0.2 ####
 
 - Add support for DOI field, formatting as URI *iff* there is no URL field.
-- Provide methods for citing page or section numbers, modeled on [biblatex][biblatex] syntax.
 - Provide methods for simultaneously citing multiple entries, modeled on [biblatex][biblatex] syntax.
 
 #### 0.1 ####

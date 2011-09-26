@@ -52,9 +52,10 @@ module Nesta
         # TODO:
         # - Add starred versions, eg. textcite*(citekey), which suppress author names.
 
-        # USAGE: textcite('citationkey')
-        # Modeled on biblatex command \textcite{citationkey}
-        def textcite(citekey)
+        # USAGE: textcite('citationkey', 'prenote', 'postnote')
+        #        'prenote' and 'postnote' are both optional
+        #        Modeled on biblatex command \textcite[prenote][postnote]{citationkey}
+        def textcite(citekey, postnote="", prenote="")
 
           # Assign an entry based on the citation key we have been passed.
           # TODO: Something smart if lookup fails.
@@ -72,15 +73,18 @@ module Nesta
           # Add to entries if not already present
           @theentries << theentry if !@theentries.include?(theentry)
 
-          # BibTeX::Entry[:author] returns an array of BibTeX::Names.
-          theauthors = theentry[:author]
-          citestring = formatauthors(theauthors) + " (" + theentry[:year].to_s + ")"
+          citestring = ""
+          citestring << prenote << " " unless prenote == ""
+          citestring << formatauthors(theentry[:author]) << " (" << theentry[:year].to_s
+          citestring << ", " << postnote unless postnote == ""
+          citestring << ")"
           return citestring
         end # def textcite 
 
-        # USAGE: citeauthor('citationkey')
-        # Modeled on biblatex command \citeauthor{citationkey}
-        def citeauthor(citekey)
+        # USAGE: citeauthor('citationkey', 'prenote', 'postnote')
+        #        'prenote' and 'postnote' are both optional
+        #        Modeled on biblatex command \citeauthor[prenote][postnote]{citationkey}
+        def citeauthor(citekey, postnote="", prenote="")
 
           # We don't keep track of entries cited this way for displaying in the bibliography,
           # so it may make sense to give a warning if this is called for an entry that is not
@@ -99,15 +103,17 @@ module Nesta
           # Format page numbers
           theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1&ndash;\\3') if theentry.has_field?(:pages)
 
-          # BibTeX::Entry[:author] returns an array of BibTeX::Names.
-          theauthors = theentry[:author]
-          citestring = formatauthors(theauthors)
+          citestring = ""
+          citestring << prenote << " " unless prenote == ""
+          citestring << formatauthors(theentry[:author])
+          citestring << ", " << postnote unless postnote == ""
           return citestring                            
         end # def citeauthor
 
-        # USAGE: parencite('citationkey')
-        # Modeled on biblatex command \parencite{citationkey}
-        def parencite(citekey)
+        # USAGE: parencite('citationkey', 'prenote', 'postnote')
+        #        'prenote' and 'postnote' are both optional
+        #        Modeled on biblatex command \parencite[prenote][postnote]{citationkey}
+        def parencite(citekey, postnote="", prenote="")
           
           # Assign an entry based on the citation key we have been passed.
           # TODO: Something smart if lookup fails.
@@ -122,15 +128,18 @@ module Nesta
           # Add to entries if not already present
           @theentries << theentry if !@theentries.include?(theentry)
 
-          # BibTeX::Entry[:author] returns an array of BibTeX::Names.
-          theauthors = theentry[:author]
-          citestring = "(" + formatauthors(theauthors) + ", " + theentry[:year].to_s + ")"
+          citestring = ""
+          citestring << prenote << " " unless prenote == ""
+          citestring << "(" << formatauthors(theentry[:author]) << ", " << theentry[:year].to_s
+          citestring << ", " << postnote unless postnote == ""
+          citestring << ")"
           return citestring
         end # def parencite
 
-        # USAGE: fullcite('citationkey')
-        # Modeled on biblatex command \fullcite{citationkey}
-        def fullcite(citekey)
+        # USAGE: fullcite('citationkey', 'prenote', 'postnote')
+        #        'prenote' and 'postnote' are both optional
+        #        Modeled on biblatex command \fullcite[prenote][postnote]{citationkey}
+        def fullcite(citekey, postnote="", prenote="")
 
           # Assign an entry based on the citation key we have been passed.
           # TODO: Something smart if lookup fails.
@@ -148,7 +157,10 @@ module Nesta
           # Add to entries if not already present
           @theentries << theentry if !@theentries.include?(theentry)
 
-          citestring = formatentry(theentry)
+          citestring = ""
+          citestring << prenote << " " unless prenote == ""
+          citestring << formatentry(theentry)
+          citestring << ", " << postnote unless postnote == ""
           return citestring
         end
         
@@ -182,6 +194,7 @@ module Nesta
         # - Implement this in a class extending BibTeX::Names
         def formatauthors(author)
           citestring = ""
+          # BibTeX::Entry[:author] returns an array of BibTeX::Names, so this is what we have here.
           if (author.length > 0)
             citestring << author[0].prefix.to_s << " " unless author[0].prefix.nil?
             citestring << author[0].last
