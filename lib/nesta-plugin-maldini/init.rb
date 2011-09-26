@@ -110,10 +110,10 @@ module Nesta
           return citestring                            
         end # def citeauthor
 
-        # USAGE: parencite('citationkey', 'prenote', 'postnote')
+        # USAGE: cite('citationkey', 'prenote', 'postnote')
         #        'prenote' and 'postnote' are both optional
-        #        Modeled on biblatex command \parencite[prenote][postnote]{citationkey}
-        def parencite(citekey, postnote="", prenote="")
+        #        Modeled on biblatex command \cite[prenote][postnote]{citationkey}
+        def cite(citekey, postnote="", prenote="")
           
           # Assign an entry based on the citation key we have been passed.
           # TODO: Something smart if lookup fails.
@@ -130,8 +130,17 @@ module Nesta
 
           citestring = ""
           citestring << prenote << " " unless prenote == ""
-          citestring << "(" << formatauthors(theentry[:author]) << ", " << theentry[:year].to_s
+          citestring << formatauthors(theentry[:author]) << ", " << theentry[:year].to_s
           citestring << ", " << postnote unless postnote == ""
+          return citestring
+        end # def cite
+
+        # USAGE: parencite('citationkey', 'prenote', 'postnote')
+        #        'prenote' and 'postnote' are both optional
+        #        Modeled on biblatex command \parencite[prenote][postnote]{citationkey}
+        def parencite(citekey, postnote="", prenote="")
+          citestring = "("
+          citestring << cite(citekey, postnote, prenote)
           citestring << ")"
           return citestring
         end # def parencite
