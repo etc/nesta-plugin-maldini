@@ -16,7 +16,19 @@ Maldini provides a syntax modeled on (a very small subset of) the syntax provide
 
 ## Utilities ##
 
-See [`utilities/maldini.bbx`][maldinibbx] for a [biblatex][] style file that approximates (poorly, for now) the bibliography style output by Maldini.
+See [`utilities/maldini.bbx`][maldinibbx] for a [biblatex][] style file that approximates (poorly, for now) the bibliography style output by Maldini. Install by first installing biblatex, then placing `maldini.bbx` in the local `texmf` tree (on OS X, this means in `~/Library/texmf/tex/latex/biblatex/bbx`), then including (for example) the following in your LaTeX document:
+
+    \usepackage{underscore}
+    \usepackage{csquotes}
+    \usepackage[
+    	citestyle=authoryear-comp,
+      bibstyle=maldini,
+    	hyperref=true,
+    	backref=false,
+    	abbreviate=false,
+    	sorting=nyt,
+    	useprefix=true
+    ]{biblatex}
 
 ## ACKNOWLEDGEMENTS ##
 
