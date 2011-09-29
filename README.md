@@ -14,6 +14,10 @@ For guidelines for working with Nesta plugin sources, see the [Nesta plugin][nes
 
 Maldini provides a syntax modeled on (a very small subset of) the syntax provided by [biblatex][biblatex] (it is basically a wrapper for [bibtex-ruby][bruby], which looks after the hard work of parsing the BibTeX file). The Maldini [project homepage][maldiniproject] is itself an example of how to employ Maldini. The source from which it is generated can be browsed [here][src], and the BibTeX file it employs can be browsed [here][maldinibib]. More detailed information can be found in the Maldini [YARD Documentation][maldiniyard], which is automatically generated every time the Maldini sources are updated.
 
+## Utilities ##
+
+See [`utilities/maldini.bbx`][maldinibbx] for a [biblatex][] style file that approximates (poorly, for now) the bibliography style output by Maldini.
+
 ## ACKNOWLEDGEMENTS ##
 
 - [Graham Ashton][ashton] for the lovely [Nesta][nesta].
@@ -127,6 +131,7 @@ Copyright © 2011 Brad Weslake.
 [keil]: http://sylvester.keil.or.at/
 [latex]: http://www.latex-project.org/
 [libgit2]: http://libgit2.github.com/
+[maldinibbx]: https://github.com/etc/nesta-plugin-maldini/blob/master/utilities/maldini.bbx
 [maldinibib]: https://github.com/etc/bweslake/blob/master/content/attachments/maldini.bib
 [maldiniproject]: http://bweslake.org/research/resources/maldini
 [maldiniyard]: http://rubydoc.info/github/etc/nesta-plugin-maldini/master/frames
