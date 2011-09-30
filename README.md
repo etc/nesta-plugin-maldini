@@ -22,7 +22,7 @@ See [`utilities/maldini.bbx`][maldinibbx] for a [biblatex][] style file that app
     \usepackage{csquotes}
     \usepackage[
     	citestyle=authoryear-comp,
-      bibstyle=maldini,
+        bibstyle=maldini,
     	hyperref=true,
     	backref=false,
     	abbreviate=false,
@@ -47,6 +47,7 @@ See [`utilities/maldini.bbx`][maldinibbx] for a [biblatex][] style file that app
   - Citation methods have optional `prenote` and `postnote` parameters, modeled on [biblatex][biblatex] syntax
 - `Nesta::Plugin::Maldini::Bibliography` public methods:
   - `open()`
+  - `nocite()`
   - `cite()`
   - `parencite()`
   - `textcite()`
