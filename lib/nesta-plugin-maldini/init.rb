@@ -52,32 +52,29 @@ module Nesta
         # TODO:
         # - Add starred versions, eg. textcite*(citekey), which suppress author names.
 
+        # USAGE: nocite('citationkey')
+        #        Modeled on biblatex command \nocite{citationkey}
+        def nocite(citekey)
+          citestring = ""
+          theentry = addentry(citekey)
+          citestring  << "**Maldini: Invalid Citation Key**" if theentry == nil
+          return citestring
+        end # def nocite
+
         # USAGE: textcite('citationkey', 'prenote', 'postnote')
         #        'prenote' and 'postnote' are both optional
         #        Modeled on biblatex command \textcite[prenote][postnote]{citationkey}
         def textcite(citekey, postnote="", prenote="")
-
-          # Assign an entry based on the citation key we have been passed.
-          # TODO: Something smart if lookup fails.
-          theentry = @thebibliography[citekey.to_sym]
-
-          if theentry.has_field?(:crossref)
-            # The thing to do here is to populate any fields present in parent but not child.
-            # This is a hack for now.  See: https://github.com/inukshuk/bibtex-ruby/issues/22
-            theentry = crosspopulate(theentry,@thebibliography[theentry[:crossref].to_sym])
-          end # if
-
-          # Format page numbers
-          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1&ndash;\\3') if theentry.has_field?(:pages)
-
-          # Add to entries if not already present
-          @theentries << theentry if !@theentries.include?(theentry)
-
           citestring = ""
-          citestring << prenote << " " unless prenote == ""
-          citestring << formatauthors(theentry[:author]) << " (" << theentry[:year].to_s
-          citestring << ", " << postnote unless postnote == ""
-          citestring << ")"
+          theentry=addentry(citekey)
+          if theentry == nil
+            citestring << "**Maldini: Invalid Citation Key**"
+          else
+            citestring << prenote << " " unless prenote == ""
+            citestring << formatauthors(theentry[:author]) << " (" << theentry[:year].to_s
+            citestring << ", " << postnote unless postnote == ""
+            citestring << ")"
+          end # if
           return citestring
         end # def textcite 
 
@@ -94,44 +91,33 @@ module Nesta
           # TODO: Something smart if lookup fails.
           theentry = @thebibliography[citekey.to_sym]
 
-          if theentry.has_field?(:crossref)
-            # The thing to do here is to populate any fields present in parent but not child.
-            # This is a hack for now.  See: https://github.com/inukshuk/bibtex-ruby/issues/22
-            theentry = crosspopulate(entry,@thebibliography[theentry[:crossref].to_sym])
+          if theentry == nil
+            citestring << "**Maldini: Invalid Citation Key**"
+          else
+            # Format page numbers
+            theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1&ndash;\\3') if theentry.has_field?(:pages)
+
+            citestring = ""
+            citestring << prenote << " " unless prenote == ""
+            citestring << formatauthors(theentry[:author])
+            citestring << ", " << postnote unless postnote == ""
           end # if
-
-          # Format page numbers
-          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1&ndash;\\3') if theentry.has_field?(:pages)
-
-          citestring = ""
-          citestring << prenote << " " unless prenote == ""
-          citestring << formatauthors(theentry[:author])
-          citestring << ", " << postnote unless postnote == ""
-          return citestring                            
+          return citestring
         end # def citeauthor
 
         # USAGE: cite('citationkey', 'prenote', 'postnote')
         #        'prenote' and 'postnote' are both optional
         #        Modeled on biblatex command \cite[prenote][postnote]{citationkey}
         def cite(citekey, postnote="", prenote="")
-          
-          # Assign an entry based on the citation key we have been passed.
-          # TODO: Something smart if lookup fails.
-          theentry = @thebibliography[citekey.to_sym]
-
-          if theentry.has_field?(:crossref)
-            # The thing to do here is to populate any fields present in parent but not child.
-            # This is a hack for now.  See: https://github.com/inukshuk/bibtex-ruby/issues/22
-            theentry = crosspopulate(entry,@thebibliography[theentry[:crossref].to_sym])
-          end # if
-
-          # Add to entries if not already present
-          @theentries << theentry if !@theentries.include?(theentry)
-
           citestring = ""
-          citestring << prenote << " " unless prenote == ""
-          citestring << formatauthors(theentry[:author]) << ", " << theentry[:year].to_s
-          citestring << ", " << postnote unless postnote == ""
+          theentry=addentry(citekey)
+          if theentry == nil
+            citestring << "**Maldini: Invalid Citation Key**"
+          else
+            citestring << prenote << " " unless prenote == ""
+            citestring << formatauthors(theentry[:author]) << ", " << theentry[:year].to_s
+            citestring << ", " << postnote unless postnote == ""
+          end # if
           return citestring
         end # def cite
 
@@ -149,27 +135,15 @@ module Nesta
         #        'prenote' and 'postnote' are both optional
         #        Modeled on biblatex command \fullcite[prenote][postnote]{citationkey}
         def fullcite(citekey, postnote="", prenote="")
-
-          # Assign an entry based on the citation key we have been passed.
-          # TODO: Something smart if lookup fails.
-          theentry = @thebibliography[citekey.to_sym]
-
-          if theentry.has_field?(:crossref)
-            # The thing to do here is to populate any fields present in parent but not child.
-            # This is a hack for now.  See: https://github.com/inukshuk/bibtex-ruby/issues/22
-            theentry = crosspopulate(entry,@thebibliography[theentry[:crossref].to_sym])
-          end # if
-
-          # Format page numbers
-          theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1&ndash;\\3') if theentry.has_field?(:pages)
-
-          # Add to entries if not already present
-          @theentries << theentry if !@theentries.include?(theentry)
-
           citestring = ""
-          citestring << prenote << " " unless prenote == ""
-          citestring << formatentry(theentry)
-          citestring << ", " << postnote unless postnote == ""
+          theentry=addentry(citekey)
+          if theentry == nil
+            citestring << "**Maldini: Invalid Citation Key**"
+          else
+            citestring << prenote << " " unless prenote == ""
+            citestring << formatentry(theentry)
+            citestring << ", " << postnote unless postnote == ""
+          end # if
           return citestring
         end
         
@@ -347,7 +321,29 @@ module Nesta
         end #formatentry
 
         # @group UTILITIES
-        
+
+        # USAGE: addentry('citationkey')
+        #        Preprocessing to keep track of our citations
+        def addentry(citekey)
+          theentry = @thebibliography[citekey.to_sym]
+          if theentry == nil
+            return nil
+          else
+            # Add to entries and preprocess if not already in our list
+            if !@theentries.include?(theentry)
+              @theentries << theentry 
+              if theentry.has_field?(:crossref)
+                # The thing to do here is to populate any fields present in parent but not child.
+                # This is a hack for now.  See: https://github.com/inukshuk/bibtex-ruby/issues/22
+                theentry = crosspopulate(theentry,@thebibliography[theentry[:crossref].to_sym])
+              end # if
+              # Format page numbers
+              theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1&ndash;\\3') if theentry.has_field?(:pages)
+            end # if
+            return theentry
+          end #if
+        end # def addentry
+
         # This is a hack for now.  See: https://github.com/inukshuk/bibtex-ruby/issues/22
         def crosspopulate(entry,parententry)
           parententry.fields.keys.each do |k|
