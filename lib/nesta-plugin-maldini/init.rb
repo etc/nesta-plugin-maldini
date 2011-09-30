@@ -61,7 +61,7 @@ module Nesta
           return citestring
         end # def nocite
 
-        # USAGE: textcite('citationkey', 'prenote', 'postnote')
+        # USAGE: textcite('citationkey', 'postnote', 'prenote')
         #        'prenote' and 'postnote' are both optional
         #        Modeled on biblatex command \textcite[prenote][postnote]{citationkey}
         def textcite(citekey, postnote="", prenote="")
@@ -78,7 +78,7 @@ module Nesta
           return citestring
         end # def textcite 
 
-        # USAGE: citeauthor('citationkey', 'prenote', 'postnote')
+        # USAGE: citeauthor('citationkey', 'postnote', 'prenote')
         #        'prenote' and 'postnote' are both optional
         #        Modeled on biblatex command \citeauthor[prenote][postnote]{citationkey}
         def citeauthor(citekey, postnote="", prenote="")
@@ -105,7 +105,7 @@ module Nesta
           return citestring
         end # def citeauthor
 
-        # USAGE: cite('citationkey', 'prenote', 'postnote')
+        # USAGE: cite('citationkey', 'postnote', 'prenote')
         #        'prenote' and 'postnote' are both optional
         #        Modeled on biblatex command \cite[prenote][postnote]{citationkey}
         def cite(citekey, postnote="", prenote="")
@@ -121,7 +121,7 @@ module Nesta
           return citestring
         end # def cite
 
-        # USAGE: parencite('citationkey', 'prenote', 'postnote')
+        # USAGE: parencite('citationkey', 'postnote', 'prenote')
         #        'prenote' and 'postnote' are both optional
         #        Modeled on biblatex command \parencite[prenote][postnote]{citationkey}
         def parencite(citekey, postnote="", prenote="")
@@ -131,7 +131,7 @@ module Nesta
           return citestring
         end # def parencite
 
-        # USAGE: fullcite('citationkey', 'prenote', 'postnote')
+        # USAGE: fullcite('citationkey', 'postnote', 'prenote')
         #        'prenote' and 'postnote' are both optional
         #        Modeled on biblatex command \fullcite[prenote][postnote]{citationkey}
         def fullcite(citekey, postnote="", prenote="")
