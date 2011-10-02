@@ -15,7 +15,7 @@ module Nesta
         # @group INITIALIZATION
 
         # USAGE:  Nesta::Plugin::Maldini::Bibliography.new('file')
-        #         'file' is optional
+        # - 'file' is optional
         def initialize(file = nil)
           # Initialise instance variables
           @thebibliography = nil
@@ -55,7 +55,8 @@ module Nesta
         # - Add starred versions, eg. textcite*(citekey), which suppress author names.
 
         # USAGE: nocite('citationkey')
-        #        Modeled on biblatex command \nocite{citationkey}
+        # - Modeled on biblatex command \nocite{citationkey}
+        # - nocite('*') is a special case, which cites every entry in the bibliography
         def nocite(citekey) 
           citestring = ""
           if citekey == '*'
@@ -70,8 +71,8 @@ module Nesta
         end # def nocite
 
         # USAGE: textcite('citationkey', 'postnote', 'prenote')
-        #        'prenote' and 'postnote' are both optional
-        #        Modeled on biblatex command \textcite[prenote][postnote]{citationkey}
+        # - 'prenote' and 'postnote' are both optional
+        # - Modeled on biblatex command \textcite[prenote][postnote]{citationkey}
         def textcite(citekey, postnote="", prenote="")
           citestring = ""
           theentry=addentry(citekey)
@@ -88,8 +89,8 @@ module Nesta
         end # def textcite 
 
         # USAGE: citeauthor('citationkey', 'postnote', 'prenote')
-        #        'prenote' and 'postnote' are both optional
-        #        Modeled on biblatex command \citeauthor[prenote][postnote]{citationkey}
+        # - 'prenote' and 'postnote' are both optional
+        # - Modeled on biblatex command \citeauthor[prenote][postnote]{citationkey}
         def citeauthor(citekey, postnote="", prenote="")
 
           # We don't keep track of entries cited this way for displaying in the bibliography,
@@ -116,8 +117,8 @@ module Nesta
         end # def citeauthor
 
         # USAGE: cite('citationkey', 'postnote', 'prenote')
-        #        'prenote' and 'postnote' are both optional
-        #        Modeled on biblatex command \cite[prenote][postnote]{citationkey}
+        # - 'prenote' and 'postnote' are both optional
+        # - Modeled on biblatex command \cite[prenote][postnote]{citationkey}
         def cite(citekey, postnote="", prenote="")
           citestring = ""
           theentry=addentry(citekey)
@@ -133,8 +134,8 @@ module Nesta
         end # def cite
 
         # USAGE: parencite('citationkey', 'postnote', 'prenote')
-        #        'prenote' and 'postnote' are both optional
-        #        Modeled on biblatex command \parencite[prenote][postnote]{citationkey}
+        # - 'prenote' and 'postnote' are both optional
+        # - Modeled on biblatex command \parencite[prenote][postnote]{citationkey}
         def parencite(citekey, postnote="", prenote="")
           citestring = "("
           citestring << cite(citekey, postnote, prenote)
@@ -143,8 +144,8 @@ module Nesta
         end # def parencite
 
         # USAGE: fullcite('citationkey', 'postnote', 'prenote')
-        #        'prenote' and 'postnote' are both optional
-        #        Modeled on biblatex command \fullcite[prenote][postnote]{citationkey}
+        # - 'prenote' and 'postnote' are both optional
+        # - Modeled on biblatex command \fullcite[prenote][postnote]{citationkey}
         def fullcite(citekey, postnote="", prenote="")
           citestring = ""
           theentry=addentry(citekey)
@@ -162,7 +163,7 @@ module Nesta
         # @group REFERENCE LISTS
 
         # USAGE: printbibliography()
-        # Modeled on biblatex command \printbibliography        
+        # - Modeled on biblatex command \printbibliography        
         def printbibliography()
           # Sort by last name first, first name second, year third
           @theentries.sort_by!{ |e| [
@@ -350,7 +351,7 @@ module Nesta
         # @group UTILITIES
 
         # USAGE: addentry('citationkey')
-        #        Preprocessing to keep track of our citations
+        # - Preprocessing to keep track of our citations
         def addentry(citekey)
           theentry = @thebibliography[citekey.to_sym]
           if theentry == nil
