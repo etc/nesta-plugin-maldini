@@ -42,27 +42,28 @@ See [`utilities/maldini.bbx`][maldinibbx] for a [biblatex][] style file that app
 
 - Initial skeleton release.
 - Supported features:
-  - Correctly parses LaTeX code in field data
-  - Sorts reference list by surname, then first name, then year
-  - Citation methods have optional `prenote` and `postnote` parameters, modeled on [biblatex][biblatex] syntax
+    - Correctly parses LaTeX code in field data (to the extent enabled by [latex-decode][])
+    - Sorts reference list by surname, then first name, then year
+    - Citation methods have optional `prenote` and `postnote` parameters, modeled on [biblatex][biblatex] syntax
+    - `nocite('*')`, like biblatex command `\nocite(*)`, invisibly cites every entry in the bibliography, thereby providing a simple way to print the entire contents of a bibliography.
 - `Nesta::Plugin::Maldini::Bibliography` public methods:
-  - `open()`
-  - `nocite()`
-  - `cite()`
-  - `parencite()`
-  - `textcite()`
-  - `citeauthor()`
-  - `fullcite()`
-  - `printbibliography()`
+    - `open()`
+    - `nocite()`
+    - `cite()`
+    - `parencite()`
+    - `textcite()`
+    - `citeauthor()`
+    - `fullcite()`
+    - `printbibliography()`
 - Supported entry types:
-  - `article`
-  - `book`
-  - `inbook`
-  - `incollection`
-  - `inproceedings`
+    - `article`
+    - `book`
+    - `inbook`
+    - `incollection`
+    - `inproceedings`
 - Unsupported entry types:
-  - `unpublished`
-  - `phdthesis`
+    - `unpublished`
+    - `phdthesis`
 
 ## TODO ##
 
@@ -143,6 +144,7 @@ Copyright © 2011 Brad Weslake.
 [heroku]: http://www.heroku.com/
 [keil]: http://sylvester.keil.or.at/
 [latex]: http://www.latex-project.org/
+[latex-decode]: https://github.com/inukshuk/latex-decode
 [libgit2]: http://libgit2.github.com/
 [maldinibbx]: https://github.com/etc/nesta-plugin-maldini/blob/master/utilities/maldini.bbx
 [maldinibib]: https://github.com/etc/bweslake/blob/master/content/attachments/maldini.bib
