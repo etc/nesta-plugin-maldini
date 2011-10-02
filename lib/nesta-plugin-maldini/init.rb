@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'bibtex'
 require 'date'
 
@@ -54,10 +56,16 @@ module Nesta
 
         # USAGE: nocite('citationkey')
         #        Modeled on biblatex command \nocite{citationkey}
-        def nocite(citekey)
+        def nocite(citekey) 
           citestring = ""
-          theentry = addentry(citekey)
-          citestring  << "**Maldini: Invalid Citation Key**" if theentry == nil
+          if citekey == '*'
+            @thebibliography.entries.each_value { |entry|
+              addentry(entry.key)
+            }
+          else
+            theentry = addentry(citekey)
+            citestring  << "**Maldini: Invalid Citation Key `" << citekey << "`**" if theentry == nil
+          end
           return citestring
         end # def nocite
 
@@ -68,13 +76,14 @@ module Nesta
           citestring = ""
           theentry=addentry(citekey)
           if theentry == nil
-            citestring << "**Maldini: Invalid Citation Key**"
+            citestring << "**Maldini: Invalid Citation Key** `" << citekey << "`**"
           else
             citestring << prenote << " " unless prenote == ""
             citestring << formatauthors(theentry[:author]) << " (" << theentry[:year].to_s
             citestring << ", " << postnote unless postnote == ""
             citestring << ")"
           end # if
+          citestring = "**Maldini: Invalid encoding in entry `" << citekey << "`**" unless citestring.force_encoding("UTF-8").valid_encoding?
           return citestring
         end # def textcite 
 
@@ -102,6 +111,7 @@ module Nesta
             citestring << formatauthors(theentry[:author])
             citestring << ", " << postnote unless postnote == ""
           end # if
+          citestring = "**Maldini: Invalid encoding in entry `" << citekey << "`**" unless citestring.force_encoding("UTF-8").valid_encoding?
           return citestring
         end # def citeauthor
 
@@ -118,6 +128,7 @@ module Nesta
             citestring << formatauthors(theentry[:author]) << ", " << theentry[:year].to_s
             citestring << ", " << postnote unless postnote == ""
           end # if
+          citestring = "**Maldini: Invalid encoding in entry `" << citekey << "`**" unless citestring.force_encoding("UTF-8").valid_encoding?
           return citestring
         end # def cite
 
@@ -144,6 +155,7 @@ module Nesta
             citestring << formatentry(theentry)
             citestring << ", " << postnote unless postnote == ""
           end # if
+          citestring = "**Maldini: Invalid encoding in entry `" << citekey << "`**" unless citestring.force_encoding("UTF-8").valid_encoding?
           return citestring
         end
         
@@ -152,9 +164,12 @@ module Nesta
         # USAGE: printbibliography()
         # Modeled on biblatex command \printbibliography        
         def printbibliography()
-
           # Sort by last name first, first name second, year third
-          @theentries.sort_by!{ |e| [ e[:author][0].last, e[:author][0].first, e[:year] ] }
+          @theentries.sort_by!{ |e| [
+            e.has_field?(:author) ? 1 : 0,
+            e.has_field?(:author) ? e[:author].each { |a| (a.last && a.first) ? a.last + a.first : a.last || ""} : "",
+            e.has_field?(:year) ? e[:year].to_i : 0
+          ] }
           bibliographystring = ""
           @theentries.each do |e|
               # TODO:
@@ -196,7 +211,8 @@ module Nesta
           else # ie. author.length < 0
             # TODO: Something smart here.
           end # if
-          return citestring
+
+          return citestring          
         end # def formatauthors
 
         # USAGE: formatentry(BibTeX::Entry)        
@@ -303,7 +319,7 @@ module Nesta
             #
             # TODO:
             # - Write this method.
-            entrystring << "Maldini support for phdthesis coming soon"
+            entrystring << "**Maldini: Unsupported entry type `" << entry.type.to_s << "`**"
 
           # UNPUBLISHED
           elsif entry.type == :unpublished
@@ -311,12 +327,23 @@ module Nesta
             #
             # TODO:
             # - Write this method.
-            entrystring << "Maldini support for unpublished coming soon"
+            entrystring << "**Maldini: Unsupported entry type `" << entry.type.to_s << "`**"
+
+          # PROCEEDINGS
+          elsif entry.type == :proceedings
+            # REQUIRED_FIELDS: :proceedings => [:title,:year]
+            #
+            # TODO:
+            # - Write this method.
+            entrystring << "**Maldini: Unsupported entry type `" << entry.type.to_s << "`**"
 
           # OTHER
           else
-            # TODO: Something smart here.
+            entrystring << "**Maldini: Unsupported entry type `" << entry.type.to_s << "`**"
           end # if
+
+          entrystring = "**Maldini: Invalid encoding in entry `" << entry.key.to_s << "`**" unless entrystring.force_encoding("UTF-8").valid_encoding?
+          
           return entrystring
         end #formatentry
 
@@ -332,11 +359,8 @@ module Nesta
             # Add to entries and preprocess if not already in our list
             if !@theentries.include?(theentry)
               @theentries << theentry 
-              if theentry.has_field?(:crossref)
-                # The thing to do here is to populate any fields present in parent but not child.
-                # This is a hack for now.  See: https://github.com/inukshuk/bibtex-ruby/issues/22
-                theentry = crosspopulate(theentry,@thebibliography[theentry[:crossref].to_sym])
-              end # if
+              # Cross populate fields
+              theentry.save_inherited_fields if theentry.has_parent?
               # Format page numbers
               theentry[:pages] = theentry[:pages].gsub(/(\d+)(-+)(\d+)/,'\\1&ndash;\\3') if theentry.has_field?(:pages)
             end # if
@@ -344,14 +368,6 @@ module Nesta
           end #if
         end # def addentry
 
-        # This is a hack for now.  See: https://github.com/inukshuk/bibtex-ruby/issues/22
-        def crosspopulate(entry,parententry)
-          parententry.fields.keys.each do |k|
-            entry[k] = parententry[k] unless entry.has_field?(k)
-          end # each
-          return entry
-        end # def crosspopulate
-        
       end # class Bibliography    
     end # module Maldini
   end # module Plugin
