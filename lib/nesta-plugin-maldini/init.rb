@@ -287,7 +287,7 @@ module Nesta
 
             entrystring << entry[:author].to_s 
             entrystring << "." if entrystring[-1] != "."
-            entrystring << entry[:year].to_s << ". “" << entry[:title].to_s + "”, in "
+            entrystring << " " << entry[:year].to_s << ". “" << entry[:title].to_s + "”, in "
             # TODO: Work out why entry[:editor].to_s has a weird hash in the middle, but entry[:author].to_s doesn't.
             #       Hint: It's related to BibTeX::Value::to_s()
             entrystring << formatauthors(entry[:editor]) << " (Ed), " if entry.has_field?(:editor)
@@ -305,7 +305,7 @@ module Nesta
             # REQUIRED_FIELDS: :inproceedings => [:author,:title,:booktitle,:year]
             entrystring << entry[:author].to_s 
             entrystring << "." if entrystring[-1] != "."
-            entrystring << entry[:year].to_s << ". “" << entry[:title].to_s + "”, in "
+            entrystring << " " << entry[:year].to_s << ". “" << entry[:title].to_s + "”, in "
             # TODO: Work out why entry[:editor].to_s has a weird hash in the middle, but entry[:author].to_s doesn't.
             #       Hint: It's related to BibTeX::Value::to_s()
             entrystring << formatauthors(entry[:editor]) << " (Ed), " if entry.has_field?(:editor)
