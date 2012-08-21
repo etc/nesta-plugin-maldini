@@ -329,11 +329,13 @@ module Nesta
           # UNPUBLISHED
           elsif entry.type == :unpublished
             # REQUIRED_FIELDS: :unpublished => [:author,:title,:note]
-            #
-            # TODO:
-            # - Write this method.
-            entrystring << "**Maldini: Unsupported entry type `" << entry.type.to_s << "`**"
-
+            entrystring << entry[:author].to_s
+            entrystring << "." if entrystring[-1] != "."
+            entrystring << " " << entry[:year].to_s << ". “" << entry[:title].to_s + "”"
+            entrystring << ", " << Date::MONTHNAMES[BibTeX::Entry::MONTHS.index(entry[:month].to_sym)+1] if entry.has_field?(:month)
+            entrystring << ". URI: [" << entry[:url].to_s << "](" << entry[:url].to_s << ")" if entry.has_field?(:url)
+            # entrystring << "  \nFields: " << entry.fields.to_s
+            
           # PROCEEDINGS
           elsif entry.type == :proceedings
             # REQUIRED_FIELDS: :proceedings => [:title,:year]
