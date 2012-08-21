@@ -61,8 +61,8 @@ See [`utilities/maldini.bbx`][maldinibbx] for a [biblatex][] style file that app
     - `inbook`
     - `incollection`
     - `inproceedings`
-- Unsupported entry types:
     - `unpublished`
+- Unsupported entry types:
     - `phdthesis`
 
 ## TODO ##
