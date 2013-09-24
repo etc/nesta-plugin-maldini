@@ -148,7 +148,7 @@ Copyright © 2011 Brad Weslake.
 [libgit2]: http://libgit2.github.com/
 [maldinibbx]: https://github.com/etc/nesta-plugin-maldini/blob/master/utilities/maldini.bbx
 [maldinibib]: https://github.com/etc/bweslake/blob/master/content/attachments/maldini.bib
-[maldiniproject]: http://bweslake.org/research/resources/maldini
+[maldiniproject]: http://bweslake.org/resources/maldini
 [maldiniyard]: http://rubydoc.info/github/etc/nesta-plugin-maldini/master/frames
 [nestaplug]: http://nestacms.com/docs/plugins
 [nesta]: http://nestacms.com
@@ -157,5 +157,5 @@ Copyright © 2011 Brad Weslake.
 [rspec]: http://rspec.info/
 [rubygems.org]: http://rubygems.org
 [smarty]: http://daringfireball.net/projects/smartypants/
-[src]: https://github.com/etc/bweslake/blob/master/content/pages/research/resources/maldini.haml
+[src]: https://github.com/etc/bweslake/blob/master/content/pages/resources/maldini.haml
 
