@@ -30,6 +30,10 @@ See [`utilities/maldini.bbx`][maldinibbx] for a [biblatex][] style file that app
     	useprefix=true
     ]{biblatex}
 
+Note that you will also need to refresh your `texmf` database, which on OS X means executing the following command:
+
+    sudo texhash
+
 ## ACKNOWLEDGEMENTS ##
 
 - [Graham Ashton][ashton] for the lovely [Nesta][nesta].
