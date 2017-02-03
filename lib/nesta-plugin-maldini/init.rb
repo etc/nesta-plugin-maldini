@@ -22,9 +22,9 @@ module Nesta
           @theentries = []
 
           # Open file, if such there be
-          if (file != nil)
+          if (!file.nil?)
             self.open(file)
-          end # if (file != nil)
+          end # if (!file.nil?)
         end # def initialize
 
         # @group FILES
@@ -65,7 +65,7 @@ module Nesta
             }
           else
             theentry = addentry(citekey)
-            citestring  << "**Maldini: Invalid Citation Key `" << citekey << "`**" if theentry == nil
+            citestring  << "**Maldini: Invalid Citation Key `" << citekey << "`**" if theentry.nil?
           end
           return citestring
         end # def nocite
@@ -76,7 +76,7 @@ module Nesta
         def textcite(citekey, postnote="", prenote="")
           citestring = ""
           theentry=addentry(citekey)
-          if theentry == nil
+          if theentry.nil?
             citestring << "**Maldini: Invalid Citation Key** `" << citekey << "`**"
           else
             citestring << prenote << " " unless prenote == ""
@@ -101,7 +101,7 @@ module Nesta
           # TODO: Something smart if lookup fails.
           theentry = @thebibliography[citekey.to_sym]
 
-          if theentry == nil
+          if theentry.nil?
             citestring << "**Maldini: Invalid Citation Key**"
           else
             # Format page numbers
@@ -122,7 +122,7 @@ module Nesta
         def cite(citekey, postnote="", prenote="")
           citestring = ""
           theentry=addentry(citekey)
-          if theentry == nil
+          if theentry.nil?
             citestring << "**Maldini: Invalid Citation Key**"
           else
             citestring << prenote << " " unless prenote == ""
@@ -149,7 +149,7 @@ module Nesta
         def fullcite(citekey, postnote="", prenote="")
           citestring = ""
           theentry=addentry(citekey)
-          if theentry == nil
+          if theentry.nil?
             citestring << "**Maldini: Invalid Citation Key**"
           else
             citestring << prenote << " " unless prenote == ""
@@ -362,7 +362,7 @@ module Nesta
         # - Preprocessing to keep track of our citations
         def addentry(citekey)
           theentry = @thebibliography[citekey.to_sym]
-          if theentry == nil
+          if theentry.nil?
             return nil
           else
             # Add to entries and preprocess if not already in our list
