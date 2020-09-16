@@ -33,7 +33,9 @@ module Nesta
         # - Set default file to '/attachments/bibliography.bib'
         def open(file)
           # USAGE: open('file')
-          # 'file' is ordinarily a URI specifying the address of a .bib file formatted as BibTeX
+          # 'file' must really be a file
+          # To open a URI specifying the address of a .bib file formatted as BibTeX, use syntax like this:
+          # - bib = Nesta::Plugin::Maldini::Bibliography.new(URI.open('http://bweslake.s3.amazonaws.com/research/resources/maldini/maldini.bib'))
           
           # The :filter => :latex hash tells BibTeX to convert all strings to Unicode,
           # which among other things converts '--' to endashes and special characters to
